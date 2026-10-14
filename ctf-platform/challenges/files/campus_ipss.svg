@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Imagen para Desafío 7: Análisis Forense de Metadatos (EXIF/Esteganografía)
+  FORMATO: SVG con metadatos embebidos en comentarios y campos estándar
+  LA FLAG ESTÁ EN: 
+  1. Comentario XML (visible con strings/xxd)
+  2. Campo metadata personalizado (simula EXIF UserComment)
+-->
+<svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    width="800" 
+    height="600" 
+    viewBox="0 0 800 600"
+    version="1.1">
+    
+    <!-- METADATOS SIMULADOS EXIF (Para análisis con strings/xxd/exiftool) -->
+    <!-- ExifTool: UserComment=IPSS{metadata_exif_extracted} -->
+    <!-- ExifTool: ImageDescription=Campus IPSS - Flag oculta en metadatos -->
+    <!-- ExifTool: Software=IPSS CTF Platform Generator v1.0 -->
+    <!-- ExifTool: Artist=Instituto Profesional San Sebastián -->
+    <!-- ExifTool: Copyright=IPSS 2026 - Uso Educativo -->
+    <!-- ExifTool: GPSLatitude=33.4489 S -->
+    <!-- ExifTool: GPSLongitude=70.6693 W -->
+    <!-- ExifTool: DateTimeOriginal=2026:10:13 10:00:00 -->
+    <!-- ExifTool: Make=IPSS -->
+    <!-- ExifTool: Model=CTF-Challenge-07 -->
+    
+    <!-- FLAG EMBEBIDA EN COMENTARIO (visible con strings) -->
+    <!-- FLAG: IPSS{metadata_exif_extracted} -->
+    
+    <defs>
+        <!-- Gradiente para el fondo -->
+        <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#1e3c72;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#2a5298;stop-opacity:1" />
+        </linearGradient>
+        
+        <linearGradient id="groundGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#2d5a27;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#1a3a16;stop-opacity:1" />
+        </linearGradient>
+        
+        <linearGradient id="buildingGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#8b7355;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#a68a6b;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#8b7355;stop-opacity:1" />
+        </linearGradient>
+        
+        <linearGradient id="windowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#ffd700;stop-opacity:0.9" />
+            <stop offset="100%" style="stop-color:#ffaa00;stop-opacity:0.7" />
+        </linearGradient>
+    </defs>
+    
+    <!-- Fondo - Cielo -->
+    <rect width="800" height="600" fill="url(#skyGradient)"/>
+    
+    <!-- Sol -->
+    <circle cx="700" cy="100" r="50" fill="#ffeb3b" opacity="0.9">
+        <animate attributeName="opacity" values="0.9;1;0.9" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- Rayos de sol -->
+    <g stroke="#ffeb3b" stroke-width="2" opacity="0.5">
+        <line x1="700" y1="20" x2="700" y2="5" />
+        <line x1="730" y1="50" x2="755" y2="35" />
+        <line x1="750" y1="100" x2="780" y2="100" />
+        <line x1="730" y1="150" x2="755" y2="165" />
+        <line x1="700" y1="180" x2="700" y2="195" />
+        <line x1="670" y1="150" x2="645" y2="165" />
+        <line x1="650" y1="100" x2="620" y2="100" />
+        <line x1="670" y1="50" x2="645" y2="35" />
+    </g>
+    
+    <!-- Nubes -->
+    <g fill="white" opacity="0.7">
+        <ellipse cx="150" cy="80" rx="60" ry="25" />
+        <ellipse cx="190" cy="70" rx="40" ry="20" />
+        <ellipse cx="120" cy="75" rx="35" ry="18" />
+        
+        <ellipse cx="500" cy="120" rx="50" ry="20" />
+        <ellipse cx="540" cy="115" rx="35" ry="18" />
+        <ellipse cx="470" cy="118" rx="30" ry="15" />
+    </g>
+    
+    <!-- Suelo / Césped -->
+    <rect x="0" y="400" width="800" height="200" fill="url(#groundGradient)"/>
+    
+    <!-- Edificio principal IPSS -->
+    <g transform="translate(200, 200)">
+        <!-- Cuerpo principal -->
+        <rect x="0" y="0" width="400" height="200" fill="url(#buildingGradient)" stroke="#5d4e37" stroke-width="2"/>
+        
+        <!-- Techo -->
+        <polygon points="-20,0 220,-60 420,0" fill="#8b0000" stroke="#5d0000" stroke-width="2"/>
+        
+        <!-- Ventanas - fila superior -->
+        <g fill="url(#windowGradient)">
+            <rect x="30" y="30" width="50" height="60" stroke="#5d4e37" stroke-width="1"/>
+            <rect x="100" y="30" width="50" height="60" stroke="#5d4e37" stroke-width="1"/>
+            <rect x="170" y="30" width="50" height="60" stroke="#5d4e37" stroke-width="1"/>
+            <rect x="240" y="30" width="50" height="60" stroke="#5d4e37" stroke-width="1"/>
+            <rect x="310" y="30" width="50" height="60" stroke="#5d4e37" stroke-width="1"/>
+        </g>
+        
+        <!-- Ventanas - fila inferior -->
+        <g fill="url(#windowGradient)">
+            <rect x="30" y="110" width="50" height="60" stroke="#5d4e37" stroke-width="1"/>
+            <rect x="100" y="110" width="50" height="60" stroke="#5d4e37" stroke-width="1"/>
+            <rect x="170" y="110" width="50" height="60" stroke="#5d4e37" stroke-width="1"/>
+            <rect x="240" y="110" width="50" height="60" stroke="#5d4e37" stroke-width="1"/>
+            <rect x="310" y="110" width="50" height="60" stroke="#5d4e37" stroke-width="1"/>
+        </g>
+        
+        <!-- Puerta principal -->
+        <rect x="170" y="150" width="60" height="50" fill="#4a3728" stroke="#2d1f16" stroke-width="2"/>
+        <rect x="190" y="155" width="20" height="40" fill="#ffd700" opacity="0.3"/>
+        
+        <!-- Letrero IPSS -->
+        <text x="200" y="130" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle" stroke="#000" stroke-width="1">IPSS</text>
+        <text x="200" y="155" font-family="Arial, sans-serif" font-size="10" fill="#ffd700" text-anchor="middle">Instituto Profesional San Sebastián</text>
+    </g>
+    
+    <!-- Árboles decorativos -->
+    <g transform="translate(100, 350)">
+        <rect x="20" y="60" width="10" height="80" fill="#4a3728"/>
+        <ellipse cx="25" cy="50" rx="35" ry="40" fill="#1a3a16"/>
+        <ellipse cx="10" cy="70" rx="25" ry="30" fill="#2d5a27"/>
+        <ellipse cx="40" cy="70" rx="25" ry="30" fill="#2d5a27"/>
+    </g>
+    
+    <g transform="translate(650, 350)">
+        <rect x="20" y="60" width="10" height="80" fill="#4a3728"/>
+        <ellipse cx="25" cy="50" rx="35" ry="40" fill="#1a3a16"/>
+        <ellipse cx="10" cy="70" rx="25" ry="30" fill="#2d5a27"/>
+        <ellipse cx="40" cy="70" rx="25" ry="30" fill="#2d5a27"/>
+    </g>
+    
+    <!-- Bandera IPSS -->
+    <g transform="translate(390, 50)">
+        <rect x="0" y="0" width="8" height="100" fill="#5d4e37"/>
+        <polygon points="8,10 60,30 8,50" fill="#003366"/>
+        <text x="34" y="35" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white" text-anchor="middle">IPSS</text>
+    </g>
+    
+    <!-- Texto inferior -->
+    <text x="400" y="570" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" text-anchor="middle" opacity="0.8">CTF IPSS 2026 - Desafío Forense #7</text>
+    <text x="400" y="590" font-family="Arial, sans-serif" font-size="12" fill="#ffd700" text-anchor="middle" opacity="0.6">Analiza metadatos EXIF: exiftool campus_ipss.jpg | strings campus_ipss.jpg | xxd campus_ipss.jpg</text>
+    
+    <!-- METADATOS ADICIONALES AL FINAL DEL ARCHIVO (Steganografía básica) -->
+    <!-- 
+    Datos embebidos simulados (al final del archivo, después del cierre SVG):
+    IPSS{metadata_exif_extracted}
+    Offset: 0xEOF
+    Herramientas: strings, xxd, hexdump, binwalk
+    -->
+</svg>
