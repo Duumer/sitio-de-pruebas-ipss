@@ -1,0 +1,77 @@
+# Log de acceso para Desafío 8: Análisis de Logs de Servidor Web
+# FORMATO: Combined Log Format (CLF) - IP - - [timestamp] "request" status size "referer" "user-agent"
+# LA FLAG ESTÁ EN EL USER-AGENT DE LA PETICIÓN EXITOSA (CÓDIGO 200)
+
+192.168.1.100 - - [13/Oct/2026:10:15:22 -0300] "GET / HTTP/1.1" 200 1234 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+192.168.1.100 - - [13/Oct/2026:10:15:23 -0300] "GET /css/style.css HTTP/1.1" 200 567 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+192.168.1.100 - - [13/Oct/2026:10:15:24 -0300] "GET /js/app.js HTTP/1.1" 200 890 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+
+# --- INICIO ESCANEO AUTOMATIZADO (Dirb/Dirbuster) ---
+203.0.113.45 - - [13/Oct/2026:10:16:01 -0300] "GET /admin/ HTTP/1.1" 403 123 "-" "Mozilla/5.0 (compatible; DirBuster/1.0)"
+203.0.113.45 - - [13/Oct/2026:10:16:02 -0300] "GET /administrator/ HTTP/1.1" 404 321 "-" "Mozilla/5.0 (compatible; DirBuster/1.0)"
+203.0.113.45 - - [13/Oct/2026:10:16:03 -0300] "GET /phpmyadmin/ HTTP/1.1" 404 321 "-" "Mozilla/5.0 (compatible; DirBuster/1.0)"
+203.0.113.45 - - [13/Oct/2026:10:16:04 -0300] "GET /wp-admin/ HTTP/1.1" 404 321 "-" "Mozilla/5.0 (compatible; DirBuster/1.0)"
+203.0.113.45 - - [13/Oct/2026:10:16:05 -0300] "GET /backup/ HTTP/1.1" 403 123 "-" "Mozilla/5.0 (compatible; DirBuster/1.0)"
+203.0.113.45 - - [13/Oct/2026:10:16:06 -0300] "GET /config/ HTTP/1.1" 403 123 "-" "Mozilla/5.0 (compatible; DirBuster/1.0)"
+203.0.113.45 - - [13/Oct/2026:10:16:07 -0300] "GET /api/ HTTP/1.1" 200 456 "-" "Mozilla/5.0 (compatible; DirBuster/1.0)"
+203.0.113.45 - - [13/Oct/2026:10:16:08 -0300] "GET /test/ HTTP/1.1" 404 321 "-" "Mozilla/5.0 (compatible; DirBuster/1.0)"
+203.0.113.45 - - [13/Oct/2026:10:16:09 -0300] "GET /dev/ HTTP/1.1" 403 123 "-" "Mozilla/5.0 (compatible; DirBuster/1.0)"
+203.0.113.45 - - [13/Oct/2026:10:16:10 -0300] "GET /staging/ HTTP/1.1" 404 321 "-" "Mozilla/5.0 (compatible; DirBuster/1.0)"
+
+# --- INICIO ATAQUE DE FUERZA BRUTA (Hydra/Medusa) ---
+203.0.113.45 - - [13/Oct/2026:10:17:01 -0300] "POST /login.php HTTP/1.1" 401 234 "https://ctf.ipss.cl/login.php" "Mozilla/5.0 (compatible; Hydra/9.1)"
+203.0.113.45 - - [13/Oct/2026:10:17:02 -0300] "POST /login.php HTTP/1.1" 401 234 "https://ctf.ipss.cl/login.php" "Mozilla/5.0 (compatible; Hydra/9.1)"
+203.0.113.45 - - [13/Oct/2026:10:17:03 -0300] "POST /login.php HTTP/1.1" 401 234 "https://ctf.ipss.cl/login.php" "Mozilla/5.0 (compatible; Hydra/9.1)"
+203.0.113.45 - - [13/Oct/2026:10:17:04 -0300] "POST /login.php HTTP/1.1" 401 234 "https://ctf.ipss.cl/login.php" "Mozilla/5.0 (compatible; Hydra/9.1)"
+203.0.113.45 - - [13/Oct/2026:10:17:05 -0300] "POST /login.php HTTP/1.1" 401 234 "https://ctf.ipss.cl/login.php" "Mozilla/5.0 (compatible; Hydra/9.1)"
+203.0.113.45 - - [13/Oct/2026:10:17:06 -0300] "POST /login.php HTTP/1.1" 401 234 "https://ctf.ipss.cl/login.php" "Mozilla/5.0 (compatible; Hydra/9.1)"
+203.0.113.45 - - [13/Oct/2026:10:17:07 -0300] "POST /login.php HTTP/1.1" 401 234 "https://ctf.ipss.cl/login.php" "Mozilla/5.0 (compatible; Hydra/9.1)"
+203.0.113.45 - - [13/Oct/2026:10:17:08 -0300] "POST /login.php HTTP/1.1" 401 234 "https://ctf.ipss.cl/login.php" "Mozilla/5.0 (compatible; Hydra/9.1)"
+203.0.113.45 - - [13/Oct/2026:10:17:09 -0300] "POST /login.php HTTP/1.1" 401 234 "https://ctf.ipss.cl/login.php" "Mozilla/5.0 (compatible; Hydra/9.1)"
+203.0.113.45 - - [13/Oct/2026:10:17:10 -0300] "POST /login.php HTTP/1.1" 401 234 "https://ctf.ipss.cl/login.php" "Mozilla/5.0 (compatible; Hydra/9.1)"
+
+# --- INTENTOS DE INYECCIÓN SQL ---
+203.0.113.45 - - [13/Oct/2026:10:18:01 -0300] "GET /search.php?q=test%27+OR+%271%27%3D%271 HTTP/1.1" 500 432 "-" "sqlmap/1.6.11#stable (http://sqlmap.org)"
+203.0.113.45 - - [13/Oct/2026:10:18:02 -0300] "GET /search.php?q=test%27+UNION+SELECT+NULL-- HTTP/1.1" 500 432 "-" "sqlmap/1.6.11#stable (http://sqlmap.org)"
+203.0.113.45 - - [13/Oct/2026:10:18:03 -0300] "GET /profile.php?id=1+OR+1%3D1 HTTP/1.1" 500 432 "-" "sqlmap/1.6.11#stable (http://sqlmap.org)"
+203.0.113.45 - - [13/Oct/2026:10:18:04 -0300] "POST /api/users HTTP/1.1" 400 212 "-" "sqlmap/1.6.11#stable (http://sqlmap.org)"
+
+# --- INTENTOS DE XSS ---
+203.0.113.45 - - [13/Oct/2026:10:19:01 -0300] "GET /comments.php?msg=%3Cscript%3Ealert%281%29%3C%2Fscript%3E HTTP/1.1" 200 345 "-" "Mozilla/5.0 (X11; Linux x86_64) XSS-Scanner/1.0"
+203.0.113.45 - - [13/Oct/2026:10:19:02 -0300] "POST /contact.php HTTP/1.1" 200 567 "-" "Mozilla/5.0 (X11; Linux x86_64) XSS-Scanner/1.0"
+
+# --- PETICIÓN EXITOSA - ACCESO OBTENIDO (CONTIENE LA FLAG EN USER-AGENT) ---
+203.0.113.45 - - [13/Oct/2026:10:20:15 -0300] "POST /login.php HTTP/1.1" 200 1234 "https://ctf.ipss.cl/login.php" "Mozilla/5.0 IPSS{forensic_log_trace_identified} SessionId=abc123"
+203.0.113.45 - - [13/Oct/2026:10:20:16 -0300] "GET /admin/dashboard.php HTTP/1.1" 200 5678 "https://ctf.ipss.cl/login.php" "Mozilla/5.0 IPSS{forensic_log_trace_identified} SessionId=abc123"
+203.0.113.45 - - [13/Oct/2026:10:20:17 -0300] "GET /admin/users.php HTTP/1.1" 200 3456 "https://ctf.ipss.cl/admin/dashboard.php" "Mozilla/5.0 IPSS{forensic_log_trace_identified} SessionId=abc123"
+203.0.113.45 - - [13/Oct/2026:10:20:18 -0300] "GET /admin/logs.php HTTP/1.1" 200 2345 "https://ctf.ipss.cl/admin/users.php" "Mozilla/5.0 IPSS{forensic_log_trace_identified} SessionId=abc123"
+
+# --- POST-EXPLOTACIÓN ---
+203.0.113.45 - - [13/Oct/2026:10:21:01 -0300] "GET /admin/export.php?format=csv HTTP/1.1" 200 45678 "https://ctf.ipss.cl/admin/logs.php" "Mozilla/5.0 IPSS{forensic_log_trace_identified} SessionId=abc123"
+203.0.113.45 - - [13/Oct/2026:10:21:02 -0300] "GET /api/v1/users?limit=1000 HTTP/1.1" 200 23456 "https://ctf.ipss.cl/admin/users.php" "Mozilla/5.0 IPSS{forensic_log_trace_identified} SessionId=abc123"
+
+# --- OTRO ESCANEO DESDE IP DISTINTA (Posible cómplice) ---
+198.51.100.23 - - [13/Oct/2026:10:25:01 -0300] "GET /admin/ HTTP/1.1" 403 123 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+198.51.100.23 - - [13/Oct/2026:10:25:02 -0300] "GET /.git/config HTTP/1.1" 404 321 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+198.51.100.23 - - [13/Oct/2026:10:25:03 -0300] "GET /.env HTTP/1.1" 403 123 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+
+# ============================================
+# ANÁLISIS SOLICITADO:
+# ============================================
+# 1. IP del atacante principal: 203.0.113.45
+# 2. IP secundaria: 198.51.100.23
+# 3. Herramientas detectadas: DirBuster, Hydra, sqlmap, XSS-Scanner
+# 4. Rutas escaneadas: /admin/, /administrator/, /phpmyadmin/, /wp-admin/, /backup/, /config/, /api/, /test/, /dev/, /staging/
+# 5. Petición exitosa (código 200 en login): 13/Oct/2026:10:20:15
+# 6. Flag en User-Agent: IPSS{forensic_log_trace_identified}
+# 7. Session ID robado: abc123
+# 8. Acceso posterior a panel admin y exfiltración de datos
+#
+# MITIGACIONES:
+# - Centralización de logs (SIEM: ELK, Splunk, Wazuh)
+# - Correlación de eventos y alertas automáticas (múltiples 401/403/500 seguidos)
+# - Reglas de bloqueo WAF / Fail2Ban para fuerza bruta
+# - Rate limiting en endpoints de autenticación
+# - CAPTCHA en formularios sensibles
+# - Monitoreo de User-Agents anómalos
+# - Análisis de patrones de acceso post-login exitoso tras múltiples fallos

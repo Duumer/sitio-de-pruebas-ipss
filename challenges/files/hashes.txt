@@ -1,0 +1,47 @@
+# Archivo de hashes para Desafío 6: Ruptura de Hash Débil y Reutilización de Salt
+# FORMATO: usuario:hash_md5
+# TODOS LOS HASHES SON MD5 SIN SALT (UNSALTED) - VULNERABLES A ATAQUES DE DICCIONARIO/RAINBOW TABLES
+# LA FLAG ES LA CONTRASEÑA DEL USUARIO 'admin' ENVUELTA EN FORMATO IPSS{...}
+
+admin:5f4dcc3b5aa765d61d8327deb882cf99
+profesor_garcia:21232f297a57a5a743894a0e4a801fc3
+estudiante_juan:482c811da5d5b4bc6d497ffa98491e38
+estudiante_maria:5d41402abc4b2a76b9719d911017c592
+estudiante_pedro:25d55ad283aa400af464c76d713c07ad
+secretaria:098f6bcd4621d373cade4e832627b4f6
+coordinador:9e107d9d372bb6826bd81d3542a419d6
+jefe_carrera:5f4dcc3b5aa765d61d8327deb882cf99
+bibliotecario:7c6a180b36896a0a8c02787eeafb0e4c
+auxiliar:202cb962ac59075b964b07152d234b70
+
+# ============================================
+# PISTAS PARA EL ANÁLISIS:
+# ============================================
+# 1. Hash del admin: 5f4dcc3b5aa765d61d8327deb882cf99
+#    - Este es el hash MD5 de "password"
+#    - Flag: IPSS{broken_md5_hash_salted}
+#
+# 2. Hash repetido (admin y jefe_carrera): 5f4dcc3b5aa765d61d8327deb882cf99
+#    - Reutilización de contraseñas = reutilización de hash (sin salt)
+#
+# 3. Hashes comunes identificables:
+#    - 21232f297a57a5a743894a0e4a801fc3 = "admin"
+#    - 482c811da5d5b4bc6d497ffa98491e38 = "juan123"
+#    - 5d41402abc4b2a76b9719d911017c592 = "hello"
+#    - 25d55ad283aa400af464c76d713c07ad = "pedro"
+#    - 098f6bcd4621d373cade4e832627b4f6 = "test"
+#    - 9e107d9d372bb6826bd81d3542a419d6 = "123456"
+#    - 7c6a180b36896a0a8c02787eeafb0e4c = "bibliotecario"
+#    - 202cb962ac59075b964b07152d234b70 = "123"
+#
+# 4. Herramientas recomendadas:
+#    - hashcat: hashcat -m 0 -a 0 hashes.txt rockyou.txt
+#    - john: john --format=raw-md5 --wordlist=rockyou.txt hashes.txt
+#    - Online: crackstation.net, md5decrypt.net, hashes.com
+#
+# 5. Mitigación:
+#    - Usar Argon2id: password_hash($pass, PASSWORD_ARGON2ID)
+#    - O bcrypt: password_hash($pass, PASSWORD_BCRYPT, ['cost' => 12])
+#    - Salt único por hash (generado automáticamente por password_hash)
+#    - Factor de trabajo configurable
+#    - Migrar hashes legacy al siguiente login exitoso
